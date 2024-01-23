@@ -1,0 +1,19 @@
+{
+  "name": "Sonphvl/Authorization",
+  "description": "A package for authorization by roles and permissions",
+  "autoload": {
+    "psr-4": {
+      "Sonphvl\\Authorization\\": "src/"
+    },
+    "files": [
+      "src/AuthorizationServiceProvider.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Sonphvl\\Authorization\\AuthorizationServiceProvider"
+      ]
+    }
+  }
+}
