@@ -6,15 +6,6 @@
 </head>
 
 <body>
-    @php
-        dump(session()->all());
-    @endphp
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -29,6 +20,7 @@
 
     <div id="authorization_page_content">
         <form method="post" action="{{ route('authorization.update') }}">
+            @csrf
             <button type="submit">Update</button>
             <div class="table">
                 <table id="authorization_table" class="table table-hover table-bordered table-striped display dataTable"
