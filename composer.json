@@ -1,6 +1,6 @@
 {
-  "name": "Sonphvl/Authorization",
-  "description": "A package for authorization by roles and permissions",
+  "name": "sonphvl/authorization",
+  "description": "A package for authorization by roles and permissions by Gate",
   "autoload": {
     "psr-4": {
       "Sonphvl\\Authorization\\": "src/"
