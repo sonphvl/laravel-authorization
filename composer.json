@@ -17,12 +17,6 @@
       "email": "son.phvl@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/sonphvl/laravel-authorization"
-    }
-  ],
   "extra": {
     "laravel": {
       "providers": [
