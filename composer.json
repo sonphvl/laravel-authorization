@@ -29,5 +29,8 @@
         "Sonphvl\\Authorization\\AuthorizationServiceProvider"
       ]
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {}
 }
