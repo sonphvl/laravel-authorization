@@ -26,5 +26,13 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "require": {}
+  "require": {},
+  "scripts": {
+    "post-install-cmd": [
+      "php artisan vendor:publish --tag=authorization-migrations --force"
+    ],
+    "post-update-cmd": [
+      "php artisan vendor:publish --tag=authorization-migrations --force"
+    ]
+  }
 }
