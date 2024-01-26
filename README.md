@@ -4,7 +4,8 @@ This package provides a simple implementation for authorization base on Laravel 
 
 ## Implementation
 
-1; Install the package
+### 1. Install the package
+
 This command will install the package and publish migrations.
 
 ```bash
@@ -18,7 +19,8 @@ php artisan vendor:publish --tag=authorization-migrations
 php artisan migrate
 ```
 
-2; Register the Service Provider
+### 2. Register the Service Provider
+
 Open config/app.php and add your service provider to the providers array.
 
 ```bash
@@ -30,7 +32,8 @@ Open config/app.php and add your service provider to the providers array.
 ],
 ```
 
-3; Apply Authorizable trait
+### 3. Apply Authorizable trait
+
 Add Authorizable trait to your Authenticatable model such as User model
 
 ```bash
@@ -47,7 +50,8 @@ class User extends Authenticatable
 }
 ```
 
-4; Apply the authorization to your functions
+### 4. Apply the authorization to your functions
+
 Apply the authorization to any functions you want to be authorized
 
 ```bash
@@ -67,7 +71,8 @@ class UserController extends Controller
 }
 ```
 
-5; Setting roles and permissions
+### 5. Setting roles and permissions
+
 You can map the roles and permissions at "/authorization":
 
 ```bash
