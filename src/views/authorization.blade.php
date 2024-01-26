@@ -20,7 +20,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ route('authorization.update') }}">
+    <form method="post">
         @csrf
         <div class="text-right m-1">
             <button type="submit" class="">Update</button>
