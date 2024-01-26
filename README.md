@@ -9,7 +9,7 @@ This package provides a simple implementation for authorization base on Laravel 
 This command will install the package and publish migrations.
 
 ```bash
-composer require sonphvl/authorization:dev-main
+composer require sonphvl/authorization
 ```
 
 If the migrations are not published, please run the following commands
