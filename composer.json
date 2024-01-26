@@ -1,6 +1,8 @@
 {
   "name": "sonphvl/authorization",
-  "description": "A package for authorization by roles and permissions by Gate",
+  "description": "A package for authorization by roles and permissions via Gate",
+  "license": "MIT",
+  "type": "library",
   "autoload": {
     "psr-4": {
       "Sonphvl\\Authorization\\": "src/"
@@ -9,6 +11,18 @@
       "src/AuthorizationServiceProvider.php"
     ]
   },
+  "authors": [
+    {
+      "name": "sonphamvanlam",
+      "email": "son.phvl@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sonphvl/laravel-authorization"
+    }
+  ],
   "extra": {
     "laravel": {
       "providers": [
