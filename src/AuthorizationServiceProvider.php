@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
@@ -21,16 +22,37 @@ class AuthorizationServiceProvider extends ServiceProvider
     public function boot()
     {
         //Declare authorization middleware
-        $router = $this->app['router'];
-        $router->aliasMiddleware('authorization', Middleware\AuthorizationMiddleware::class);
+        $this->app['router']->aliasMiddleware('authorization', Middleware\Authorize::class);
+
+        //Publish authorization middleware
+        $this->publishes([
+            __DIR__ . '/Middleware' => app_path('Http/Middleware'),
+        ], 'authorization-middleware');
+
+        // Register middleware as global middleware
+        if (config('authorization.global')) {
+            $kernel = $this->app->make(Kernel::class);
+            $kernel->pushMiddleware(Middleware\Authorize::class);
+        }
+
+        // Load migrations from the package
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // Publish migrations
         $this->publishes([
             __DIR__ . '/database/migrations' => database_path('migrations'),
         ], 'authorization-migrations');
 
-        // Load migrations from the package
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        //Load the Configuration File
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/authorization.php',
+            'authorization'
+        );
+
+        //Publish the configuration file
+        $this->publishes([
+            __DIR__ . '/config/authorization.php' => config_path('authorization.php'),
+        ], 'authorization-config');
 
         // Load models from the package
         $this->loadModelsFrom(__DIR__ . '/Models');
@@ -40,10 +62,6 @@ class AuthorizationServiceProvider extends ServiceProvider
 
         // Load views from the package
         $this->loadViewsFrom(__DIR__ . '/views', 'authorization');
-
-        // Register middleware as global middleware
-        // $kernel = $this->app->make(Kernel::class);
-        // $kernel->pushMiddleware(Middleware\AuthorizationMiddleware::class);
 
         // Your package boot logic here
         if (!$this->app->runningInConsole() || $this->app->runningUnitTests()) {
