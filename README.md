@@ -12,11 +12,10 @@ This command will install the package:
 composer require sonphvl/authorization
 ```
 
-The package required to publish migrations, so if the migrations are not automatically published, please run the following commands:
+This command will publish migrations files and run the migrations:
 
 ```bash
-php artisan vendor:publish --tag=authorization-migrations
-php artisan migrate
+php artisan authorization:install
 ```
 
 ### 2. Publish assets (optional)
