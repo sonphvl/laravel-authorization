@@ -29,8 +29,9 @@
   "require": {},
   "scripts": {
     "post-install-cmd": [
-      "@php artisan vendor:publish --tag=authorization-migrations --force && php artisan migrate",
-      "@php artisan migrate"
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan vendor:publish --tag=authorization-migrations --force",
+      "@php artisan migrate --tag=authorization-migrations"
     ],
     "post-update-cmd": [
       "@php artisan vendor:publish --tag=authorization-migrations --force && php artisan migrate"

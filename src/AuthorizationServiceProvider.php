@@ -40,7 +40,7 @@ class AuthorizationServiceProvider extends ServiceProvider
             __DIR__ . '/Middleware' => app_path('Http/Middleware'),
         ], 'authorization-middleware');
 
-        // Register middleware as global middleware
+        // Register authorize middleware into middleware group of Kernel
         $kernel = $this->app->make(Kernel::class);
         foreach (config('authorization.groups') as $group) {
             if ($group) $kernel->appendMiddlewareToGroup($group, 'authorize');
