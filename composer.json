@@ -28,11 +28,7 @@
   "prefer-stable": true,
   "require": {},
   "scripts": {
-    "post-install-cmd": [
-      "php artisan vendor:publish --tag=authorization-migrations --force",
-      "php artisan migrate"
-    ],
-    "post-update-cmd": [
+    "post-autoload-dump": [
       "php artisan vendor:publish --tag=authorization-migrations --force",
       "php artisan migrate"
     ]
