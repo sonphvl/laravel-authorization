@@ -26,12 +26,7 @@ class AuthorizationInstallCommand extends Command
     public function handle()
     {
         // Publish migrations
-        // Run migrations
-        $this->info('Running migrations...');
-        Artisan::call('migrate', [
-            '--tag' => 'authorization-migrations',
-        ]);
-        ('vendor:publish', [
+        $this->call('vendor:publish', [
             '--tag' => 'authorization-migrations',
             '--force' => true,
         ]);
@@ -39,6 +34,7 @@ class AuthorizationInstallCommand extends Command
         // Run migrations
         $this->info('Running migrations...');
         $this->call('migrate');
+
 
         $this->info('Authorization package installed successfully.');
     }
