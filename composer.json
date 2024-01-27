@@ -26,11 +26,5 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "require": {},
-  "scripts": {
-    "post-autoload-dump": [
-      "php artisan vendor:publish --tag=authorization-migrations --force",
-      "php artisan migrate"
-    ]
-  }
+  "require": {}
 }
