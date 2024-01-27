@@ -63,7 +63,23 @@ class AuthorizationServiceProvider extends ServiceProvider
         // Load views from the package
         $this->loadViewsFrom(__DIR__ . '/views', 'authorization');
 
-        // Your package boot logic here
+        $this->registerGate();
+        $this->registerCommand();
+    }
+
+    public function loadModelsFrom($path)
+    {
+        foreach (glob($path . '/*.php') as $modelFile) {
+            $modelClass = 'Sonphvl\\Authorization\\Models\\' . basename($modelFile, '.php');
+
+            if (class_exists($modelClass)) {
+                $this->app->bind($modelClass, $modelClass);
+            }
+        }
+    }
+
+    public function registerGate()
+    {
         if (!$this->app->runningInConsole() || $this->app->runningUnitTests()) {
             $argv = Request::server('argv', null);
             if (!$argv || !($argv[0] == 'artisan' && Str::contains($argv[1], 'migrate'))) {
@@ -81,14 +97,12 @@ class AuthorizationServiceProvider extends ServiceProvider
         }
     }
 
-    public function loadModelsFrom($path)
+    public function registerCommand()
     {
-        foreach (glob($path . '/*.php') as $modelFile) {
-            $modelClass = 'Sonphvl\\Authorization\\Models\\' . basename($modelFile, '.php');
-
-            if (class_exists($modelClass)) {
-                $this->app->bind($modelClass, $modelClass);
-            }
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\Commands\AuthorizationInstallCommand::class,
+            ]);
         }
     }
 }
