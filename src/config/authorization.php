@@ -1,9 +1,5 @@
 <?php
 
 return [
-    'global' => env('AUTHORIZATION_GLOBAL', false),
-    'roles' => [
-        'admin' => 'Administrator',
-        'user' => 'Regular User',
-    ],
+    'groups' => explode(',', env('AUTHORIZATION_MIDDLEWARE_GROUPS')),
 ];

@@ -21,28 +21,6 @@ class AuthorizationServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //Declare authorization middleware
-        $this->app['router']->aliasMiddleware('authorization', Middleware\Authorize::class);
-
-        //Publish authorization middleware
-        $this->publishes([
-            __DIR__ . '/Middleware' => app_path('Http/Middleware'),
-        ], 'authorization-middleware');
-
-        // Register middleware as global middleware
-        if (config('authorization.global')) {
-            $kernel = $this->app->make(Kernel::class);
-            $kernel->pushMiddleware(Middleware\Authorize::class);
-        }
-
-        // Load migrations from the package
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-
-        // Publish migrations
-        $this->publishes([
-            __DIR__ . '/database/migrations' => database_path('migrations'),
-        ], 'authorization-migrations');
-
         //Load the Configuration File
         $this->mergeConfigFrom(
             __DIR__ . '/config/authorization.php',
@@ -53,6 +31,28 @@ class AuthorizationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/authorization.php' => config_path('authorization.php'),
         ], 'authorization-config');
+
+        //Declare authorize middleware
+        $this->app['router']->aliasMiddleware('authorize', Middleware\Authorize::class);
+
+        //Publish authorization middleware
+        $this->publishes([
+            __DIR__ . '/Middleware' => app_path('Http/Middleware'),
+        ], 'authorization-middleware');
+
+        // Register middleware as global middleware
+        $kernel = $this->app->make(Kernel::class);
+        foreach (config('authorization.groups') as $group) {
+            if ($group) $kernel->appendMiddlewareToGroup($group, 'authorize');
+        }
+
+        // Load migrations from the package
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        // Publish migrations
+        $this->publishes([
+            __DIR__ . '/database/migrations' => database_path('migrations'),
+        ], 'authorization-migrations');
 
         // Load models from the package
         $this->loadModelsFrom(__DIR__ . '/Models');
