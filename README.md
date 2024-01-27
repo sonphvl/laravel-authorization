@@ -1,6 +1,6 @@
 # About
 
-This package provides a simple implementation for authorization base on Laravel Gate.
+This package provides a simple implementation for authorization base on Laravel Gate and middleware.
 
 ## Implementation
 
